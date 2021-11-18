@@ -1,55 +1,84 @@
-import axios from "axios";
+
+import { pokimonContants } from "../constants/constants"
+import { pokimonServices } from "../services/services"
 
 
+export const GetPokemonList = (page) => async dispath => {
 
-
-export const GetPokemonList =  (page) =>  async dispath => {
     try {
         dispath({
-            type: "POKIMON_LIST_LOADING"
+            type: pokimonContants.POKIMON_LIST_LOADING
         });
 
-        const perPage = 10;
-        const offset = page * perPage;
+        const response = await pokimonServices.pokimonList(page); // it will wait for pokimonServices file
 
-        // const res = await axios.get(` https://pokeapi.co/api/v2/ability/?limit=${perPage}&offset=${offset}`)
-        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${perPage}&offset=${offset}`);
-        
-        
         dispath({
-            type: "POKIMON_LIST_SUCCESS",
-            payload: res.data
+            type: pokimonContants.POKIMON_LIST_SUCCESS,
+            payload: response
         })
-    
+
     } catch (e) {
         dispath({
-            type: "POKIMON_LIST_FAIL",
+            type: pokimonContants.POKIMON_LIST_FAIL,
         })
     }
 
 }
 
 
- export const GetPokemonDetail = (slug) => async dispath=> {
-   
-    try{
-        dispath({
-            type: "POKEMON_BLOG_DETAIL_LOADING"
+export const GetPokemonDetail = (slug) => async dispatch => {
+
+    try {
+        dispatch({
+            type: pokimonContants.POKEMON_BLOG_DETAIL_LOADING
         })
-         
-        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${slug}`)
-        
-        dispath({
-            type: "POKEMON_BLOG_DETAIL_SUCCSESS",
-            payload: res.data
+
+        const response = await pokimonServices.pokimonDetail(slug);
+        // const res = await axios.get(`${baseUrl}${slug}`)
+
+        dispatch({
+            type: pokimonContants.POKEMON_BLOG_DETAIL_SUCCSESS,
+            payload: response
         })
 
 
     }
-     catch(e){
-         dispath({
-             type: "POKEMON_BLOG_DETAIL_FAIL"
-         })
-     }
+    catch (e) {
+        dispatch({
+            type: pokimonContants.POKEMON_BLOG_DETAIL_FAIL
+        })
+    }
+
+}
+
+export const GetPokemonSearchResults = (search) => async dispatch => {
+
+    try {
+        dispatch({
+            type: pokimonContants.POKEMON_SEARCH_RESULT_LOADING
+        })
+
+        const response = await pokimonServices.pokimonSearchResult(search);
+
+        dispatch({
+            type: pokimonContants.POKEMON_SEARCH_RESULT_SUCCESS,
+            payload: response
+        })
+
+    } catch (e) {
+        dispatch({
+            type: pokimonContants.POKEMON_SEARCH__RESULT_FAIL
+        })
+
+    }
+}
+
+
+export const ClearSearchResults = () => dispatch => {
+
+    dispatch({
+        type: pokimonContants.CLEAR_SEARCH_RESULT,
+        payload: {}
+    })
 
 }

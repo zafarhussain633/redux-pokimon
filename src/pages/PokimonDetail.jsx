@@ -4,8 +4,10 @@ import { useParams } from 'react-router-dom'
 import {GetPokemonDetail}  from "../redux/actions/pokimonAction"
 import { useDispatch, useSelector } from 'react-redux'
 
+
+
 const PokimonDetail = () => {
-  
+
   const {slug} = useParams();
 
   const pokimonDetail = useSelector(state=>state.PokimonDetail)
@@ -17,28 +19,30 @@ const PokimonDetail = () => {
      console.log("pokimon detail page" + pokimonDetail.data)
    },[slug])
    
-   
+  
 
     function showData(){
       if(pokimonDetail.data){
-        return <b>height: {pokimonDetail.data.height}</b>
+       return <h1> pokimon height: 
+        <b style={{color:"red"}}>  {pokimonDetail.data.height}</b>
+       </h1>
       }
       if(pokimonDetail.loading){
         return "loading"
       }
-      if(pokimonDetail.erroMsg.length>0){
+      if(pokimonDetail.erroMsg){
         return pokimonDetail.erroMsg
       }
     }
 
-
     return (
      <Layout>
           your sug is:  {slug}
+  
           <div>
             {showData()}
           </div>
-       
+          
     </Layout>
     )
 }
