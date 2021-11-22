@@ -10,7 +10,10 @@ const Navbar = () => {
                     <li> <Link to="/">HOme</Link> </li>
                     <li> <Link to="/about">about</Link> </li>
                     <li> <Link to="/blog">blog</Link></li>
-                    <li> <Link to="/pokimon/search?search=test">test search params</Link></li>
+                    <li> <Link to="/pokimon/search">test search params</Link></li>
+                    <li> <Link to="/counterTest">CounterTest</Link></li>
+                    <li> <Link to="/localStorage">localStorage</Link></li>
+                  
                     <li><SearchBox /></li>
                 </ul>
             </nav>

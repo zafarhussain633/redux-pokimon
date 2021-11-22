@@ -1,22 +1,21 @@
 import React from 'react'
-import { useLocation } from 'react-router';
+import {useQuery} from "../hooks/useQuery"
 import { GetPokemonSearchResults } from "../redux/actions/pokimonAction"
 import { useSelector, useDispatch } from "react-redux"
 import Layout from '../containers/component/Layout';
 import PokiMonList from '../containers/PokiMonList';
 import _ from "lodash";
 
+
+
 const SearchResult = () => {
     const dispatch = useDispatch();
     const searchResult = useSelector(state=>state.PokimonSearchResult)
 
-    function useQuery() {
-        return new URLSearchParams(useLocation().search) //here search is default which get string after ? in url
-    }
-
     const query = useQuery();
+    // query.set("search" , "pokimon")
     const userQuery = query.get("search");
-    // console.log(query);
+     console.log(userQuery);  // it will print user query after search =  ?   
 
 
     React.useEffect(() => {
@@ -53,7 +52,7 @@ const SearchResult = () => {
 
               <div>
                   <h2>
-                  your search parmas is : {query.get("search")}
+                  your search parmas is : {userQuery}
                   </h2>
                   {showData()}
               </div>
@@ -66,3 +65,6 @@ const SearchResult = () => {
 }
 
 export default SearchResult
+
+
+

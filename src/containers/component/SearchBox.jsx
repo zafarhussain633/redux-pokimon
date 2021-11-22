@@ -12,8 +12,7 @@ const SearchBox = () => {
     const reduxData  = useSelector(state=>state.PokimonSearchResult)
     const navigate = useNavigate();
     const [search, setSearch] = React.useState("")
-
-
+  
     function handleClick(){
 
         if(reduxData.data){

@@ -1,15 +1,17 @@
 
 
-const IncrementCounter = () => dispatch => {
+const IncrementCounter = (count) => dispatch => {
      dispatch({
-         type: "INCREMENT"
+         type: "INCREMENT",
+         
      })
 }
 
 
- const DecrementCounter = () => dispatch => {
+ const DecrementCounter = (count) => dispatch => {
     dispatch({
-        type: "DECREMENT"
+        type: "DECREMENT",
+       
     })
 }
 

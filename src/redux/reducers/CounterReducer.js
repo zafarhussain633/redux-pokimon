@@ -1,21 +1,26 @@
-
 const initialState = {
     count : 0
 }
 
 const CounterReducer = (state=initialState,actions) =>{
+   
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = urlSearchParams.get("value");
+
+    
+
     switch(actions.type){
         case "INCREMENT" : {
+
            return {
-              count: state.count+1
+              count: params 
            }
         }
-        case "DECREMENT" : {
 
+        case "DECREMENT" : {
             // localStorage.setItem('counterData', `${}`);
-        
             return {
-                count: state.count===0 ? state.count : state.count-1
+                count: params
             }
         }
         default : 
@@ -25,3 +30,5 @@ const CounterReducer = (state=initialState,actions) =>{
 
 
 export default CounterReducer;
+
+
